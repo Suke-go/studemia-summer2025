@@ -1,1411 +1,275 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Studemia Summer Camp 2025</title>
-    <style>
-        :root {
-            --primary-color: #4a6741; /* Forest green */
-            --secondary-color: #8ba888; /* Light forest green */
-            --accent-color: #f9c846; /* Summer yellow */
-            --text-color: #333;
-            --light-color: #f8f9f4;
-            --shadow-color: rgba(0, 0, 0, 0.1);
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Noto Sans JP', sans-serif;
-            color: var(--text-color);
-            background-color: var(--light-color);
-            line-height: 1.6;
-        }
-        
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap');
-        
-        .canvas-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.6;
-            background: linear-gradient(to bottom, #87CEEB, #e4f1fe);
-            overflow: hidden;
-        }
-        
-        .leaf {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            background: #4a6741;
-            opacity: 0.7;
-            border-radius: 30% 70% 59% 41% / 30% 40% 60% 70%;
-            animation: falling 15s linear infinite;
-        }
-        
-        .sun-rays {
-            position: absolute;
-            top: 80px;
-            right: 80px;
-            width: 120px;
-            height: 120px;
-            background: radial-gradient(circle, rgba(255,215,0,0.6) 0%, rgba(255,215,0,0) 70%);
-            border-radius: 50%;
-            animation: pulse 5s ease-in-out infinite;
-        }
-        
-        @keyframes falling {
-            0% {
-                transform: translateY(-100px) rotate(0deg) scale(1);
-            }
-            100% {
-                transform: translateY(calc(100vh + 100px)) rotate(360deg) scale(0.7);
-            }
-        }
-        
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-                opacity: 0.4;
-            }
-            50% {
-                transform: scale(1.2);
-                opacity: 0.7;
-            }
-        }
-        
-        header {
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 1rem 0;
-            box-shadow: 0 2px 5px var(--shadow-color);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 1rem;
-        }
-        
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo-img {
-            width: 40px;
-            height: 40px;
-            margin-right: 10px;
-            background-color: var(--primary-color);
-            border-radius: 50%;
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-        
-        nav ul li {
-            margin-left: 1.5rem;
-        }
-        
-        nav ul li a {
-            text-decoration: none;
-            color: var(--primary-color);
-            font-weight: 500;
-            padding: 0.5rem;
-            border-radius: 4px;
-            transition: background-color 0.3s;
-        }
-        
-        nav ul li a:hover {
-            background-color: var(--secondary-color);
-            color: white;
-        }
-        
-        main {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-        
-        .hero {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 4rem 0;
-        }
-        
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin-bottom: 2rem;
-        }
-        
-        .cta-button {
-            display: inline-block;
-            background-color: var(--accent-color);
-            color: var(--text-color);
-            padding: 0.8rem 1.5rem;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px var(--shadow-color);
-        }
-        
-        section {
-            margin-bottom: 3rem;
-            background-color: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px var(--shadow-color);
-        }
-        
-        h2 {
-            color: white;
-            background-color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            padding: 0.7rem 1rem;
-            border-radius: 4px;
-            font-size: 1.4rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        h3 {
-            color: var(--primary-color);
-            margin: 1.5rem 0 1rem;
-            font-size: 1.2rem;
-            border-left: 4px solid var(--primary-color);
-            padding-left: 1rem;
-        }
-        
-        .updates {
-            border-left: 4px solid var(--accent-color);
-            padding-left: 1rem;
-            margin-bottom: 2rem;
-        }
-        
-        .updates-list {
-            list-style: none;
-        }
-        
-        .updates-list li {
-            margin-bottom: 0.5rem;
-            display: flex;
-        }
-        
-        .updates-list .date {
-            min-width: 100px;
-            font-weight: 600;
-        }
-        
-        .schedule {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1.5rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        
-        .schedule th, .schedule td {
-            border: 1px solid #ddd;
-            padding: 10px 15px;
-            text-align: left;
-        }
-        
-        .schedule th {
-            background-color: var(--primary-color);
-            color: white;
-            font-weight: 600;
-        }
-        
-        .schedule tr:nth-child(even) {
-            background-color: #f5f9f5;
-        }
-        
-        .schedule tr:hover {
-            background-color: #eaf4ea;
-        }
-        
-        .program-day {
-            margin-bottom: 2.5rem;
-            background-color: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px var(--shadow-color);
-        }
-        
-        .program-day h4 {
-            color: var(--primary-color);
-            margin-bottom: 1.2rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--secondary-color);
-            font-size: 1.2rem;
-        }
-        
-        .special-session {
-            background-color: rgba(249, 200, 70, 0.1);
-            border-left: 4px solid var(--accent-color);
-            padding: 1rem;
-            margin: 1.5rem 0;
-            border-radius: 0 4px 4px 0;
-        }
-        
-        .special-session h4 {
-            color: var(--primary-color);
-            margin-bottom: 0.8rem;
-        }
-        
-        .sponsor-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            justify-content: center;
-            margin-top: 2rem;
-        }
-        
-        .sponsor-item {
-            width: 150px;
-            height: 150px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            padding: 1rem;
-        }
-        
-        .committee-member {
-            margin-bottom: 1.5rem;
-        }
-        
-        .committee-member h4 {
-            color: var(--primary-color);
-            margin-bottom: 0.3rem;
-        }
-        
-
-        .committee-wrapper {
-            margin-bottom: 40px;
-        }
-        
-        .committee-title {
-            font-size: 20px;
-            margin-bottom: 15px;
-            color: #3498db;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 5px;
-        }
-        
-        .committee-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        
-        .committee-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        
-        .committee-member-card {
-            display: flex;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            width: calc(50% - 10px);
-            min-width: 300px;
-        }
-        
-        .member-photo {
-            width: 120px;
-            height: 150px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #e0e0e0;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        /* 画像表示用のスタイル */
-        .member-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        /* 画像が無い場合のバックアップ表示用 */
-        .member-avatar {
-            width: 70px;
-            height: 70px;
-            background-color: #3498db;
-            color: white;
-            font-size: 32px;
-            font-weight: bold;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 50%;
-        }
-        
-        .member-info {
-            padding: 15px;
-            flex: 1;
-        }
-        
-        .member-info h4 {
-            margin: 0 0 5px 0;
-            font-size: 18px;
-        }
-        
-        .role {
-            color: #7f8c8d;
-            font-size: 14px;
-            margin: 0 0 10px 0;
-        }
-        
-        .member-details {
-            font-size: 14px;
-        }
-        
-        .member-details p {
-            margin: 5px 0;
-            display: flex;
-            align-items: center;
-        }
-        
-        .detail-icon {
-            margin-right: 8px;
-            font-style: normal;
-        }
-        
-        /* レスポンシブデザイン */
-        @media (max-width: 768px) {
-            .committee-row {
-                flex-direction: column;
-            }
-            
-            .committee-member-card {
-                width: 100%;
-            }
-        }
-        
-        /* 写真アップロード関連のスタイル */
-        .photo-upload {
-            position: absolute;
-            bottom: 5px;
-            right: 5px;
-            background: rgba(0,0,0,0.5);
-            color: white;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        footer {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 2rem 0;
-            margin-top: 4rem;
-        }
-        
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            padding: 0 1rem;
-        }
-        
-        .footer-section {
-            margin-bottom: 1.5rem;
-            min-width: 200px;
-        }
-        
-        .footer-section h3 {
-            color: white;
-            margin-bottom: 1rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-            padding-bottom: 0.5rem;
-        }
-        
-        .footer-section         ul {
-            list-style: none;
-            padding: 0 0 0 1rem;
-        }
-        
-        section ul {
-            list-style: disc;
-            padding: 0 0 0 2rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        section ul li {
-            margin-bottom: 0.5rem;
-        }
-        
-        .special-session ul {
-            list-style: disc;
-            padding: 0 0 0 1.5rem;
-        }
-        
-        .footer-section ul li {
-            margin-bottom: 0.5rem;
-        }
-        
-        .footer-section a {
-            color: white;
-            text-decoration: none;
-        }
-        
-        .footer-section a:hover {
-            text-decoration: underline;
-        }
-        
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.3);
-            margin-top: 2rem;
-            width: 100%;
-        }
-        
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .header-container {
-                flex-direction: column;
-                padding: 1rem;
-            }
-            
-            .logo {
-                margin-bottom: 1rem;
-            }
-            
-            nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            nav ul li {
-                margin: 0.5rem;
-            }
-            
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .program-item {
-                flex-direction: column;
-            }
-            
-            .program-time {
-                margin-bottom: 0.3rem;
-            }
-            
-            .footer-container {
-                flex-direction: column;
-            }
-        }
-        
-        /* Tab styles for different pages */
-        .tabs {
-            display: flex;
-            flex-wrap: wrap;
-            margin-bottom: 0;
-            border-bottom: 2px solid var(--secondary-color);
-        }
-        
-        .tab {
-            padding: 0.8rem 1.5rem;
-            cursor: pointer;
-            border-radius: 8px 8px 0 0;
-            margin-right: 0.2rem;
-            background-color: #f0f0f0;
-            transition: all 0.3s ease;
-        }
-        
-        .tab:hover {
-            background-color: #e0e0e0;
-        }
-        
-        .tab.active {
-            background-color: var(--primary-color);
-            color: white;
-        }
-        
-        .tab-content {
-            display: none;
-            padding-top: 1.5rem;
-        }
-        
-        .tab-content.active {
-            display: block;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Studemia Summer Camp 2025 – 共同体をどのようにデザインするのか</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--accent-blue:#e8f4ff;--accent-green:#e8fff4;--text:#222;--gray:#666;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Noto Sans JP',sans-serif;background:#fff;color:var(--text);line-height:1.7;}
+    header{padding:5rem 1rem 3rem;text-align:center;}
+    header h1{font-size:3rem;font-weight:700;margin-bottom:0.4rem;letter-spacing:0.02em;}
+    .tagline{font-size:1.15rem;color:var(--gray);margin-bottom:1rem;}
+    nav{display:flex;gap:1rem;justify-content:center;margin-top:1.5rem;flex-wrap:wrap;}
+    nav a{color:var(--gray);text-decoration:none;padding:0.5rem 1.2rem;border-radius:6px;transition:background .25s ease;}
+    nav a:hover{background:var(--accent-blue);}    
+    section{padding:4rem 1rem;max-width:960px;margin:auto;}
+    section:nth-of-type(even){background:#fafafa;}
+    h2{font-size:2rem;font-weight:600;margin-bottom:1.3rem;}
+    ul,li{list-style:none;}
+    .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.6rem;}
+    .card{padding:1.6rem;border:1px solid #e6e6e6;border-radius:12px;background:#fff;text-align:center;}
+    .card img{width:120px;height:120px;border-radius:50%;object-fit:cover;margin-bottom:0.8rem;}
+    .card h3{font-size:1.3rem;font-weight:600;margin-bottom:0.4rem;}
+    .card p{font-size:0.9rem;line-height:1.5;color:#444;}
+    .sns a{font-size:0.85rem;margin:0 0.4rem;color:var(--gray);text-decoration:none;}
+    .sns a:hover{text-decoration:underline;}
+    a.btn{display:inline-block;margin-top:1.2rem;background:#222;color:#fff;padding:1rem 1.8rem;border-radius:7px;text-decoration:none;transition:opacity .2s ease;}
+    a.btn:hover{opacity:.85;}
+    #gol-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;opacity:0.25;pointer-events:none;}
+    details{border:1px solid #e0e0e0;border-radius:8px;padding:0.8rem;margin-bottom:0.8rem;background:#fff;}
+    details summary{cursor:pointer;font-weight:600;}
+    time{font-family:monospace;margin-right:0.4rem;}
+    .news-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;}
+    .news-item{border-left:4px solid var(--accent-blue);padding:0.8rem 1rem;background:#fff;border-radius:6px;}
+    .news-item small{color:var(--gray);font-size:0.75rem;}
+    .thanks-list li{margin-bottom:0.5rem;}
+    /* schedule */
+    details{border:1px solid #e0e0e0;border-radius:8px;padding:0.8rem;margin-bottom:0.8rem;background:#fff;}
+    details summary{cursor:pointer;font-weight:600;}
+    time{font-family:monospace;margin-right:0.4rem;}
+    /* news section */
+    .news-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;}
+    .news-item{border-left:4px solid var(--accent-blue);padding:0.8rem 1rem;background:#fff;border-radius:6px;}
+    .news-item small{color:var(--gray);font-size:0.75rem;}
+  </style>
 </head>
 <body>
-    <div class="canvas-container">
-        <div class="sun-rays"></div>
-        <!-- 落ち葉のアニメーション用の要素 -->
-        <div class="leaf" style="left: 10%; animation-delay: 0s;"></div>
-        <div class="leaf" style="left: 20%; animation-delay: 3s;"></div>
-        <div class="leaf" style="left: 35%; animation-delay: 6s;"></div>
-        <div class="leaf" style="left: 50%; animation-delay: 9s;"></div>
-        <div class="leaf" style="left: 65%; animation-delay: 12s;"></div>
-        <div class="leaf" style="left: 80%; animation-delay: 2s;"></div>
-        <div class="leaf" style="left: 90%; animation-delay: 7s;"></div>
+  <canvas id="gol-canvas"></canvas>
+
+  <header>
+    <h1>Studemia Summer Camp</h1>
+    <p class="tagline">Tsukuba, Ibaraki</p>
+    <nav>
+      <a href="#concept">コンセプト</a>
+      <a href="#news">News</a>
+      <a href="#details">開催概要</a>
+      <a href="#speakers">ゲスト</a>
+      <a href="#schedule">スケジュール</a>
+      <a href="#team">運営</a>
+      <a href="#register">参加登録</a>
+      <a href="#sponsor">協賛</a>
+      <a href="#archives">アーカイブ</a>
+    </nav>
+  </header>
+
+  <section id="concept">
+    <h2>Concept</h2>
+    <p><strong>Studemia Summer Camp</strong> は、研究者・クリエイター・起業家の卵が2日間こもり、<em>自分の知識のすそ野を広げ</em> また、研究室の中では生まれないような議論に真剣に向き合うための学術イベントです。<br>
+      ▶︎ <strong>問いを持ち寄る</strong> ― 参加者が抱える〈いま解きたい社会・研究・表現の問い〉を共有し合う。<br>
+      ▶︎ <strong>即席チームで実験する</strong> ― キーノートと <em>アンカンファレンス</em> 形式でテーマを掘り下げ、夜通しでプロトタイピング・議論をする。<br>
+      テーマ <strong>「共同体をどのようにデザインするのか」</strong> は、<u>ヒト・モノ・コトをつなぐ仕組み</u> を自分の中で問い直すことを目的としております。
+    </section>
+
+  <section id="news">
+    <h2>News</h2>
+   <div class="news-list">
+      <div class="news-item"><strong>2025-05-20</strong><br>公式サイトを公開しました！<br><small>Webチーム</small></div>
+      <div class="news-item"><strong>2025-05-20</strong><br>7/18につくばにて前夜祭を実施します。興味がある人は事前に予定を入れてください．<br><small>清水</small></div>
+      <!-- 追加ニュースは以下の形式で複製 -->
+      <!-- <div class="news-item"><strong>YYYY-MM-DD</strong><br>本文<br><small>投稿者</small></div> -->
     </div>
-    
-    <header>
-        <div class="header-container">
-            <a href="#" class="logo">
-                <div class="logo-img"></div>
-                Studemia
-            </a>
-            <nav>
-                <ul>
-                    <li><a href="#" class="active" data-page="home">ホーム</a></li>
-                    <li><a href="#" data-page="call">発表募集</a></li>
-                    <li><a href="#" data-page="program">プログラム</a></li>
-                    <li><a href="#" data-page="participation">参加者の方へ</a></li>
-                    <li><a href="#" data-page="sponsor">スポンサー</a></li>
-                    <li><a href="#" data-page="about">Studemiaについて</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-    
-    <main>
-        <!-- Home Page Content -->
-        <div id="home-content" class="page-content active">
-            <section class="hero">
-                <h1>Studemia Summer Camp 2025</h1>
-                <p>自分の活動に熱心に取り組んでいる若手が集まり，自分の見識のすそ野を広げ合う合宿形式のワークショップ</p>
-                <a href="#" class="cta-button" data-page="registration">参加登録はこちら</a>
-            </section>
-            
-            <section class="updates">
-                <h2>最新情報</h2>
-                <ul class="updates-list">
-                    <li>
-                        <span class="date">2025.3.4</span>
-                        <span>Studemia Summer Camp 2025のWebサイトを公開しました</span>
-                    </li>
-                    <li>
-                        <span class="date">2025.5.5</span>
-                        <span>Early Registration 開始予定</span>
-                    </li>
-                </ul>
-            </section>
-            
-            <section>
-                <h2>概要</h2>
-                <p>
-                    Studemia campは自分の活動に熱心に取り組んでいる若手が集まり，自分の見識のすそ野を広げ合う合宿形式のワークショップです．
-                    参加者同士で自分たちの取り組んでいる研究・制作活動をあえて批判的に考えてみたり，
-                    普段の活動の中ではなかなか触れないような分野について議論してみたりする機会として位置づけております．
-                </p>
-                <p>
-                    合宿には，例年自分自身の研究課題を本格的に持って活動をしている人から，
-                    まだ研究課題は見つけていないが，様々な本を読んで自分の視点を広げようとしている人まで約30名程度参加いただいております．
-                    今回の合宿の中で，ぜひ研究室で研究活動だけしていては見つけられないような発見が皆さんにあることを願っております．
-                </p>
-                <p>
-                    募集形式を一覧で整理しておりますので<a href="#" data-page="call">発表募集</a>をご覧ください．
-                </p>
-                <p>
-                    なお，本年は現地のみの開催を計画しています．
-                </p>
-                <p>
-                    プログラム委員長 清水紘輔（筑波大）<br>
-                    <a href="#" data-page="about-content">Studemia Summer Camp実行委員会</a>
-                </p>
-                
-                <h3>開催概要</h3>
-                <ul>
-                    <li>主催：Studemia実行委員会</li>
-                    <li>日時：2025年7月19日（土）～7月20日（日）</li>
-                    <li>場所：関東近郊（調整中）</li>
-                    <li>LT発表枠締切：2025年6月</li>
-                </ul>
-            </section>
-            
-            <section>
-                <h2>問い合わせ先</h2>
-                <h3>イベント全般に関する問い合わせ先</h3>
-                <p>2025 at studemia.org</p>
-                
-                <h3>企業スポンサー（五十音順）</h3>
-                <div class="sponsor-list">
-                    <!-- Sponsor logos will go here -->
-                    <div class="sponsor-item">スポンサー1</div>
-                    <div class="sponsor-item">スポンサー2</div>
-                    <div class="sponsor-item">スポンサー3</div>
-                </div>
-            </section>
-        </div>
-        
-        <!-- Call for Presentations Page Content -->
-        <div id="call-content" class="page-content">
-            <section>
-                <h2>発表募集</h2>
-                <div class="tabs">
-                    <div class="tab active" data-tab="overview">概要</div>
-                    <div class="tab" data-tab="lt">LT発表</div>
-                    <div class="tab" data-tab="demo">デモ・ポスター発表</div>
-                </div>
-                
-                <div id="overview-tab" class="tab-content active">
-                    <h3>募集形式一覧</h3>
-                    <p>
-                        自分自身のこだわりを突き詰めた研究成果・作品制作についての発表を広く募集します．
-                        発表を通じて一度に30人の多様なバックグラウンドを持っている人たちからのフィードバックを受けることができます．
-                        奮ってご応募ください．
-                    </p>
-                </div>
-                
-                <div id="keynote-tab" class="tab-content">
-                    <h3>LT発表</h3>
-                    <h4>概要</h4>
-                    <p>
-                        本合宿では約10名の登壇発表者を募集しております．
-                        4分間で自分の研究や考えているコトに対してプレゼンテーションを行ってくださる方を募集しております．
-                        1ページの発表概要書を提出してください．また登録いただいた方は採録に関係なく，参加費を2,000円減額します．
-                    </p>
-                    
-                    <h4>提出物</h4>
-                    <p>4ページ以内の発表概要書（日本語あるいは英語）をPDFで提出してください。</p>
-                    
-                    <h4>採択後の流れ</h4>
-                    <p>
-                        採録された提出物については，カメラレディ原稿の提出をお願いします．
-                        フォーマットは投稿時と同一です．査読コメントを参照の上，論文をブラッシュアップしてください．
-                        発表のタイトル・アブストラクトのWeb公開は開催約1カ月前に行います．
-                        カメラレディ原稿は参加者間で合宿中に共有されます．
-                    </p>
-                    
-                    <h4>登壇発表の諸注意</h4>
-                    <p>
-                        これまで何かしらの形に自分の思考を落とし込めていること<br>
-                        本合宿での登壇発表の位置づけは一つの研究・作品に対して多面的な形でディスカッションを行うことです．
-                        分野は問いませんが，「他の参加者に新たな視点を与えるであろう」内容の発表を想定しております．
-                        プログラム委員会が審査し，内容が不適切だと判断した場合は，不採択となる可能性があります．
-                    </p>
-                    <p>
-                        書類の品質<br>
-                        新規性の高い面白い研究・作品であっても，記述の質が著しく低い場合（説明が理解できない，本質的に重要な情報が書かれていない等））は評価が低くなります．
-                    </p>
-                    <p>
-                        諸注意<br>
-                        反社会的な内容や研究手法が含まれている場合は不採録となります．
-                        著作権などの他者の権利を侵害しないよう注意してください．また投稿いただいた文章は協賛企業などにお配りする「ZINE」の発行などに用います．
-                    </p>
-                </div>
-                
-                <div id="lt-tab" class="tab-content">
-                    <h3>LT発表</h3>
-                    <p>2ページ以内の発表計画書（日本語あるいは英語）をPDFで提出してください．</p>
-                </div>
-                
-                <div id="demo-tab" class="tab-content">
-                    <h3>デモ・ポスター発表</h3>
-                    <p>なにかしらのデモンストレーションをナイトセッションでおこなう機会を作ります。</p>
-                    <p>
-                        割り当てられたスペースで研究に関連する発表をしていただきます．
-                        標準的には2m四方程度のスペース・椅子・電源とを用意する予定です．
-                    </p>
-                </div>
-            </section>
-        </div>
-        
-        <!-- Program Page Content -->
-                    <div id="program-content" class="page-content">
-            <section>
-                <h2>プログラム</h2>
-                <h3>全体スケジュール</h3>
-                
-                <div class="program-day">
-                    <h4>一日目（7月12日）</h4>
-                    <table class="schedule">
-                        <thead>
-                            <tr>
-                                <th>時間</th>
-                                <th>内容</th>
-                                <th>備考</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>13:30 - 13:55</td>
-                                <td>オープニング</td>
-                                <td>運営委員会よりご挨拶・スケジュールなどの説明</td>
-                            </tr>
-                            <tr>
-                                <td>13:55 - 14:55</td>
-                                <td>登壇発表</td>
-                                <td>3件 (各15分発表+5分質疑)</td>
-                            </tr>
-                            <tr>
-                                <td>14:55 - 15:10</td>
-                                <td>休憩</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>15:10 - 15:55</td>
-                                <td>登壇発表</td>
-                                <td>2~3件 (各15分発表+5分質疑)</td>
-                            </tr>
-                            <tr>
-                                <td>15:55 - 16:10</td>
-                                <td>休憩</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>16:10 - 16:50</td>
-                                <td>デモ・ポスターセッション</td>
-                                <td>各参加者によるポスター発表・ディスカッションブース・デモ発表を試験的に実施します．</td>
-                            </tr>
-                            <tr>
-                                <td>16:50 - 17:00</td>
-                                <td>休憩</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>17:00 - 18:30</td>
-                                <td>特別講演</td>
-                                <td>詳細は特別講演セクションをご覧ください</td>
-                            </tr>
-                            <tr>
-                                <td>19:00 - 20:30</td>
-                                <td>夕食</td>
-                                <td>参加者交流会</td>
-                            </tr>
-                            <tr>
-                                <td>20:30 - 22:00</td>
-                                <td>ナイトセッション</td>
-                                <td>自由参加</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                
-                <div class="program-day">
-                    <h4>二日目（7月13日）</h4>
-                    <table class="schedule">
-                        <thead>
-                            <tr>
-                                <th>時間</th>
-                                <th>内容</th>
-                                <th>備考</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>09:00 - 10:30</td>
-                                <td>特別講演</td>
-                                <td>詳細は特別講演セクションをご覧ください</td>
-                            </tr>
-                            <tr>
-                                <td>10:30 - 10:45</td>
-                                <td>休憩</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>10:45 - 11:30</td>
-                                <td>Lightning Talk 10連発</td>
-                                <td>各4分の発表</td>
-                            </tr>
-                            <tr>
-                                <td>11:30 - 11:45</td>
-                                <td>休憩</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>11:45 - 12:00</td>
-                                <td>アンカンファレンスセッション準備</td>
-                                <td>各4分の発表</td>
-                            </tr>
-                            <tr>
-                                <td>12:00 - 13:30</td>
-                                <td>昼食</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>13:30 - 15:00</td>
-                                <td>アンカンファレンスセッション</td>
-                            </tr>
-                            <tr>
-                                <td>15:00 - 16:00</td>
-                                <td>クロージング</td>
-                                <td>総括・次回案内</td>
-                            </tr>
-                            <tr>
-                                <td>16:00</td>
-                                <td>解散</td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                
-                <h3>LTセッション</h3>
-                <div class="special-session">
-                    <h4>Lightning Talk概要</h4>
-                    <p>本合宿では、厳選された約6名の登壇発表を2つのセッションに分けて行います。各発表は4分のプレゼンテーションと1枚の概要シートから成り立ちます。</p>
-                    <p>登壇発表者は、自分の興味や関心を深く掘り下げて発表します。これを踏まえて興味のあるLTテーマに参加者が集まり、議論をする機会とします。</p>
-                    <p>発表タイトルや概要は、イベント約1カ月前にWebサイトで公開予定です。</p>
-                </div>
-                
-<!--                 <h3>特別講演セッション</h3>
-                <div class="special-session">
-                    <h4>一日目特別講演 (17:00-18:30)</h4>
-                    <p><strong>テーマ：</strong>未定</p>
-                    <p><strong>講演者：</strong>未定</p>
-                    <p><strong>概要：</strong>本セッションでは、インタラクティブシステムや研究活動に関する最新の動向について専門家から講演いただきます。議論を通じて参加者の視野を広げる機会となります。</p>
-                </div>
-                
-                <div class="special-session">
-                    <h4>二日目特別講演 (9:00-10:30)</h4>
-                    <p><strong>テーマ：</strong>未定</p>
-                    <p><strong>講演者：</strong>未定</p>
-                    <p><strong>概要：</strong>学際的な視点から若手研究者・学生に向けた、研究活動における視点の広げ方についての講演を予定しています。</p>
-                </div> -->
-                
-                <h3>特別ワークショップ (13:30-15:00)</h3>
-                <div class="special-session">
-                    <p>二日目午後には以下の中から選択できる複数のワークショップを開催します：</p>
-                    <ul>
-                        <li><strong>短期間アイディアソン：</strong>限られた時間で新しいアイデアを生み出すワークショップ</li>
-                        <li><strong>お菓子を食べながら雑談する会：</strong>リラックスした雰囲気で自由に交流</li>
-                        <li><strong>調整中...</strong></li>
-                        <!-- <li><strong>若手の会：</strong>若手研究者・学生向けの交流と情報交換の場</li>
-                        <li><strong>未来の研究者WS：</strong>研究キャリアについて考えるワークショップ</li> -->
-                    </ul>
-                </div>
-            </section>
-        </div>
-        
-        <!-- Participation Page Content -->
-        <div id="participation-content" class="page-content">
-            <section>
-                <h2>参加者の方へ</h2>
-                <h3>概要</h3>
-                <li>
-                    Studemia2025は合宿形式のワークショップ（現地参加のみ）として行います．
-                    会場に1泊2日で宿泊し，登壇発表・デモ発表・ナイトセッション等にご参加いただきます．
-                    全ての発表・聴講は現地発表のみとなります．
-                </li>
-                <li>
-                    会場の詳細やアクセス情報は，ローカル情報をご覧ください．
-                </li>
-                <li>
-                    事前参加登録なしの当日参加はできませんので，ご注意ください．
-                </li>
-                
-                <h3>スケジュール</h3>
-                <ul>
-                    <li>2025年5月5日　Early Registration 開始</li>
-                    <li>2025年6月5日　Early Registration 〆切</li>
-                    <li>2025年6月20日　Mid Registration〆切</li>
-                    <li>2025年7月1日　Late Registration〆切</li>
-                    <li>2025年7月12日～2025年7月13日　合宿開催</li>
-                </ul>
-                
-                <h3>参加費</h3>
-                <p>参加費には，合宿参加費と宿泊費が含まれます．</p>
-                <p>学生の発表を奨励するために，発表を行う学生の参加料金を安く設定しています．</p>
-                <ul>
-                    <li>大学生【発表あり】：未定</li>
-                    <li>大学生【発表なし】：未定</li>
-                    <li>高校生：無料</li>
-                    <li>一般参加費：未定</li>
-                </ul>
-                
-                <h3>参加登録について</h3>
-                <h4>お支払い方法</h4>
-                <ul>
-                    <li>銀行振込（振込手数料支払者負担）</li>
-                    <li>実行委員への手渡し（非推奨）</li>
-                </ul>
-                
-                <h4>キャンセルポリシー</h4>
-                <div class="table-wrapper">
-                    <table class="cancel-policy-table">
-                        <thead>
-                            <tr>
-                                <th>キャンセル時期</th>
-                                <th>キャンセル料（参加費に対する割合）</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>2025年6月20日まで</td>
-                                <td class="free">無料（0%）</td>
-                            </tr>
-                            <tr>
-                                <td>2025年6月21日～7月1日</td>
-                                <td>30%</td>
-                            </tr>
-                            <tr>
-                                <td>2025年7月2日～7月5日</td>
-                                <td>50%</td>
-                            </tr>
-                            <tr>
-                                <td>2025年7月6日～7月8日</td>
-                                <td>80%</td>
-                            </tr>
-                            <tr>
-                                <td>合宿前日・当日，及び無連絡の不参加</td>
-                                <td class="full">100%</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <p class="note">※合宿直前または当日に発熱や体調不良がある場合には，無理して現地に来ずに，運営に連絡してください．上記のキャンセル手数料とは別な扱いでキャンセルを認めることがあります．</p>
-                
-                <h3>諸注意</h3>
-                <h4>宿泊について</h4>
-                <li>
-                    Studemiaは合宿形式のワークショップで，1泊2日の宿泊参加をしていただくことが前提となります．
-                    部分参加をご希望の際は，運営に相談をしてください．
-                </li>
-                <li>
-                    現地参加可能数には上限があるため，参加希望者が上限を超えた場合には，予定より早めに申し込みを締め切る可能性があります．
-                </li>
-                <li>
-                    会場および客室内は禁煙です．喫煙は喫煙所でお願いします．
-                </li>
-            </section>
-        </div>
-        
-        <!-- Sponsor Page Content -->
-                    <div id="sponsor-content" class="page-content">
-            <section>
-                <h2>企業スポンサー募集</h2>
-                <h3>概要</h3>
-                <p>
-                    企業の皆様へ． Studemiaは，広く人文知・科学領域におけるアイデア・研究・技術や知識の交換を奨励し，
-                    学術的な進歩を促進することを目的としています．毎年30名以上の参加者がおり，大学・大学院の学生が過半数を占めております．
-                    学生の参加費をできるだけ抑えながら，この目標を達成するために，企業の皆様のご協賛が極めて重要です．
-                </p>
-                
-                <h3>協賛特典</h3>
-                <ul>
-                    <li>Studemia Summer Camp2025への割引参加（2名まで）</li>
-                    <li>Webサイトやオープニング・クロージングでの貴社ロゴ掲載</li>
-                    <li>参加者へのパンフレット等配布</li>
-                    <li>デモブースでの企業紹介</li>
-                    <li>協賛プレゼンテーションでの企業紹介</li>
-                    <li>ナイトセッションでの枠優先権
-                        <ul>
-                            <li>ナイトセッション会場で行う企画枠（少人数のミニプレゼン・ディスカッション等）を優先的に確保できます．リラックスした雰囲気の中で参加者と交流を深められます．</li>
-                        </ul>
-                    </li>
-                </ul>
-                
-                <h3>スポンサー料金</h3>
-                <p>未定</p>
-                
-                <h3>申込締切</h3>
-                <p>未定</p>
-                
-                <h3>問い合わせ先</h3>
-                <p>スポンサーに関するご希望・事前の問い合わせ等は，下記のメールアドレスまでご連絡ください．</p>
-                <p>2025 at studemia.org</p>
-            </section>
-        </div>
-        
-        <!-- About Studemia Page Content -->
-        <div id="about-content" class="page-content">
-            <section>
-                <h2>Studemiaについて</h2>
-                <h3>What is Studemia?</h3>
-                <p>
-                    Studemiaは，2022年に立ち上げられた団体です．東京大学グローバルサイエンスキャンパスの参加者を中心として，
-                    中高生と多様な社会人をつなぐ活動を行ってきました．メンバーの受験を機に，一度は<strong>自然消滅</strong>した団体でしたが，
-                    2024年春，主要メンバーが大学受験を終えたため，再び<strong>惰性</strong>で活動を再開しました．
-                </p>
-                <p>
-                    再開後は，メンバー同士で自分たちの取り組んでいる研究活動をあえて批判的に考えてみたり，
-                    研究室の中ではなかなか触れないような分野について本を読んで議論してみたりと，
-                    <strong>肩の力を抜いて自分たちの視野を広げる活動</strong>をしてまいりました．
-                    そしてこの度，この取り組みを大々的に行ってみようとのことで，本合宿の開催に至りました．
-                </p>
-                <p>
-                    合宿には，自分自身の研究課題を本格的に持って活動をしている人から，
-                    まだ研究課題は見つけていないが，様々な本を読んで自分の視点を広げようとしている人までたくさんいます．
-                    今回の合宿の中で，ぜひ研究室で研究活動だけしていては見つけられないような発見が皆さんにあることを願っております．
-                </p>
-                
-                
-                <h3>運営委員会（組閣中）</h3>
-                <div class="committee-wrapper">
-                    <div class="committee-grid">
-                        <div class="committee-row">
-                            <div class="committee-member-card">
-                                <div class="member-photo">
-                                    <img src="https://pbs.twimg.com/profile_images/1719553746991235072/qzlc7WBZ_400x400.jpg">
-                                </div>
-                                <div class="member-info">
-                                    <h4>清水紘輔</h4>
-                                    <p class="role">プログラム委員長</p>
-                                    <div class="member-details">
-                                        <p><i class="detail-icon">所属：</i> 筑波大学</p>
-                                        <p><i class="detail-icon">興味：</i> Human-Computer Interaction</p>
-                                    </div>
-                                </div>
-                            </div>
-                            
-<!--                             <div class="committee-member-card">
-                                <div class="member-photo">
-                                    <img src="https://scontent-nrt1-2.xx.fbcdn.net/v/t39.30808-6/469235823_883291260638577_4131397717963392934_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=2IqXPTVvYUQQ7kNvgG2Ue3z&_nc_zt=23&_nc_ht=scontent-nrt1-2.xx&_nc_gid=AghHsHN11_sTqjayKAaHmPu&oh=00_AYCc0MLAyJkIyn0taH0emtlHKA8id8qfXJ2QGJI7wEFHIQ&oe=67CCF6A3">
-                                </div>
-                                <div class="member-info">
-                                    <h4>川村賢人</h4>
-                                    <p class="role">実行委員長</p>
-                                    <div class="member-details">
-                                        <p><i class="detail-icon">所属：</i> 早稲田大学</p>
-                                        <p><i class="detail-icon">興味：</i> ジャズ</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="committee-row">
-                            <div class="committee-member-card">
-                                <div class="member-photo">
-                                    <img src="https://pbs.twimg.com/profile_images/1865635775007858688/kv8c0_Jz_400x400.jpg">
-                                </div>
-                                <div class="member-info">
-                                    <h4>高野瑠衣</h4>
-                                    <p class="role">ロゴ・デザイン</p>
-                                    <div class="member-details">
-                                        <p><i class="detail-icon">所属：</i> 早稲田大学</p>
-                                        <p><i class="detail-icon">興味：</i> ハーモノグラフ</p>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="committee-member-card">
-                                <div class="member-photo">
-                                    <img src="https://shodaitanaka.com/wp-content/uploads/2024/04/IMG_2661-2-2.jpg" >
-                                </div>
-                                <div class="member-info">
-                                    <h4>田中翔大</h4>
-                                    <p class="role">Lightning Talks</p>
-                                    <div class="member-details">
-                                        <p><i class="detail-icon">所属：</i> Stanford大学</p>
-                                        <p><i class="detail-icon">興味：</i> バイオリン・非線形物理学</p>
-                                    </div>
-                                </div>
-                            </div> -->
-                        </div>
-                    
-                        
-                    </div>
-                </div>
-                
-                <h3>持ち物に関して</h3>
-                <div class="items-to-bring">
-                    <div class="item-category">
-                        <h4>必須持参品</h4>
-                        <ul class="item-list">
-                            <li>着替え・寝具・アメニティ（寝具/履物は<strong>有料</strong>です）</li>
-                            <li>歯ブラシ（施設では提供されない場合があります）</li>
-                            <li>常備薬（必要な方）</li>
-                            <li>パソコン・タブレット（各企画でScrapboxを使用します）</li>
-                            <li>充電器・モバイルバッテリー</li>
-                        </ul>
-                        <p class="item-note">
-                            <!-- 宿泊部屋内の備品についての詳細は<a href="https://www.kamigo-morinoie.com/stay/" target="_blank">こちら</a>をご参照ください。 -->
-                        </p>
-                    </div>
-                    
-                    <div class="item-category">
-                        <h4>あると良いもの</h4>
-                        <ul class="item-list">
-                            <li>飲み物（議論の途中で飲むもの）</li>
-                            <li>お菓子（議論の途中でつまむもの・持参いただけると大変ありがたいです）</li>
-                            <li>メモ帳・筆記用具</li>
-                        </ul>
-                        <p class="item-note">※暑い季節ですので、チョコレート類の持参はご注意ください。</p>
-                    </div>
-                    
-                    <!-- <div class="item-category prohibited">
-                        <h4><i class="item-icon">⛔</i> 持込禁止品</h4>
-                        <ul class="item-list">
-                            <li><strong>花火</strong>（施設で禁止されています）</li>
-                            <li>二酸化硫黄</li>
-                            <li>プルトニウム</li>
-                            <li>その他危険物</li>
-                        </ul> -->
-                        <!-- <p class="item-note warning">※禁止品の持ち込みは運営に多大な迷惑をかけることになります。</p> -->
-                    <!-- </div> -->
-                    
-                    <div class="special-note">
-                        <p><strong>特段配慮が必要な時は事前にプログラム委員会のメンバーにお伝えください。</strong></p>
-                    </div>
-                </div>
-                
-                <h3>お願い</h3>
-                <p>
-                    この合宿は主催の一人である清水のつながりを中心に，色々なことに打ち込んでいる人を集めてみたらどうなるのかを検証するためのものでもあります．
-                    そのため，一つの具体的な事象について勉強をするのではなく，どちらかというと各自が日々感じている課題意識（社会課題に限らず）や
-                    興味分野をぶつけ合わせる場所を作ったときに起こる反応を目的にしています．
-                </p>
-                <p>
-                    この合宿を将来的には大きくしていくかもしれませんし，毎年少ない人数で進めていくかもしれません．
-                    この目的があるようで無目的で，無目的なようで目的があるというわけのわからないスタンスで実施するので，
-                    様々な状況において運営は臨機応変に対応を進めていきます．皆さんも臨機応変に動いていただければ嬉しいです．
-                    合宿の中で，皆さんが楽しめる環境をお互いに構築しあう努力をすることが重要だと考えております．
-                </p>
-                <p>
-                    皆さん積極的に交流を進めてください．研究興味分野を聞けば，ほぼ確実に内容が返ってくると思うのでコミュ障でも安心してください．
-                    しかしながら，研究に活動を特化させていない人もいるので，あまりにも研究研究するのも良くないかもしれません．
-                    具体的な研究内容の共有をする高尚な場でしかないということは，避けたいです．
-                </p>
-                <p>
-                    また今回は，準備が間に合えば，独自ツールを用いた進行を行っていきたいと思います．
-                    その際には柔軟なご協力をお願いします．
-                </p>
-                <p>
-                    当日の運営について、基本的にはscrapboxのscheduleのページにある通り進行していきますが、
-                    adminの判断等により内容等多少の変更があるかもしれません。また、所々施設利用に関する業務連絡も流します。
-                    連絡を確認できるようにしておいてください。
-                </p>
-            </section>
-            
-            <section>
-                <h2>各種ポリシー</h2>
-                <h3>プライバシーポリシー</h3>
-                <p>参加者の方に登録いただいた個人情報は以下の目的にのみ使用します．</p>
-                <ul>
-                    <li>ワークショップの管理運営のために，実行委員会内で使用します．</li>
-                    <li>参加者間の交流活性化のため，参加者名簿を参加者に配布します．これには氏名，所属，電子メールが含まれます．</li>
-                    <li>今後の研究会活動のお知らせのため，Studemiaメーリングリストに登録します（希望により削除可能です）．</li>
-                </ul>
-                
-                <h3>アンチハラスメントポリシー</h3>
-                <div class="policy-box">
-                    <p class="policy-intro">Studemiaではアンチハラスメントポリシーを設けています。必ずご一読ください。</p>
-                    
-                    <div class="policy-section">
-                        <h4>基本原則</h4>
-                        <ul class="policy-list">
-                            <li>自由な思考と表現、そしてオープンな場における敬意のある議論を尊重します</li>
-                            <li>多様な価値観を認め合うコミュニティと場の形成を目指します</li>
-                            <li>科学的・建設的な議論は推奨されますが、相互尊重が基本です</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="policy-section">
-                        <h4>ハラスメント行為の定義</h4>
-                        <p>以下を含むハラスメント行為を容認しません：</p>
-                        <ul class="policy-list">
-                            <li>ストーカー行為</li>
-                            <li>望まない写真撮影や録音・録画</li>
-                            <li>不適切な接触</li>
-                            <li>人種、性別、宗教、年齢、色、外見に基づく嫌がらせ</li>
-                            <li>国籍、祖先、障害、性同一性、性的嗜好に基づく嫌がらせ</li>
-                            <li>これらに関連した不快な言動</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="policy-section">
-                        <h4>ポリシーの目的</h4>
-                        <ul class="policy-list">
-                            <li>挑戦的な科学的議論を妨げることが目的ではありません</li>
-                            <li>ハラスメント行為を防止することであらゆる参加者を歓迎します</li>
-                            <li>オープンな場で科学的な議論を行うことを促進することを意図しています</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="policy-section last">
-                        <h4>報告と対応</h4>
-                        <ul class="policy-list">
-                            <li>ハラスメント行為を経験または目撃した場合運営委員にご連絡ください</li>
-                            <li>ハラスメント行為が認められた場合、その参加者に対して運営が適切と考えるアクションを行います</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </main>
-    
-    <footer>
-        <div class="footer-container">
-            <div class="footer-section">
-                <h3>Studemia Summer Camp 2025</h3>
-                <p>みんなで世界のすそ野を広げよう</p>
-            </div>
-            
-            <div class="footer-section">
-                <h3>リンク</h3>
-                <ul>
-                    <li><a href="#" data-page="home">ホーム</a></li>
-                    <li><a href="#" data-page="call">発表募集</a></li>
-                    <li><a href="#" data-page="program">プログラム</a></li>
-                    <li><a href="#" data-page="participation">参加者の方へ</a></li>
-                    <li><a href="#" data-page="sponsor">スポンサー</a></li>
-                    <li><a href="#" data-page="about">Studemiaについて</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-section">
-                <h3>問い合わせ</h3>
-                <p>イベント全般に関する問い合わせ先: 2025 at studemia.org</p>
-            </div>
-            
-            <div class="copyright">
-                &copy; 2025 Studemia
-            </div>
-        </div>
-    </footer>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            function addRandomLeaves() {
-                const container = document.querySelector('.canvas-container');
-                for (let i = 0; i < 5; i++) {
-                    setTimeout(() => {
-                        const leaf = document.createElement('div');
-                        leaf.className = 'leaf';
-                        leaf.style.left = Math.random() * 100 + '%';
-                        leaf.style.width = 30 + Math.random() * 20 + 'px';
-                        leaf.style.height = 30 + Math.random() * 20 + 'px';
-                        const r1 = 30 + Math.random() * 40;
-                        const r2 = 40 + Math.random() * 50;
-                        const r3 = 30 + Math.random() * 40;
-                        const r4 = 40 + Math.random() * 50;
-                        leaf.style.borderRadius = `${r1}% ${r2}% ${r3}% ${r4}%`;
-                        leaf.style.transform = `rotate(${Math.random() * 360}deg)`;
-                        leaf.style.animationDuration = 10 + Math.random() * 10 + 's';
-                        
-                        container.appendChild(leaf);
-                        
-                        leaf.addEventListener('animationend', function() {
-                            leaf.remove();
-                        });
-                    }, i * 5000); // 5秒ごとに追加
-                }
+  </section>
+
+  <section id="details">
+    <h2>Event Details</h2>
+    <ul>
+      <li><strong>日時：</strong>2025年7月19日(金) 13:30 – 7月20日(日) 15:00</li>
+      <li><strong>場所：</strong>茨城県つくば市</li>
+      <li><strong>形式：</strong>オフライン合宿（宿泊あり）</li>
+      <li><strong>対象：</strong>高校生・大学生・大学院生</li>
+      <li><strong>参加費：</strong>高校生：無料／大学生・院生：5,000円（宿泊費込・税込）</li>
+    </ul>
+  </section>
+
+  <section id="speakers">
+    <h2>Guest Speakers</h2>
+    <div class="card-grid">
+      <div class="card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Koichiro_Eto_20160130.jpg/250px-Koichiro_Eto_20160130.jpg" alt="江渡浩一郎">
+        <h3>江渡 浩一郎</h3>
+        <p>メディアアーティスト／情報科学者。ニコニコ学会β創設など市民科学の橋渡し役。学位は博士。国立研究開発法人産業技術総合研究所 人間拡張研究センター 共創場デザイン研究チーム、ニコニコ学会β実行委員会委員長、慶應義塾大学SFC 特別招聘教授、Tsukuba Mini Maker Faire 2020 プログラム委員長。</p>
+      </div>
+      <div class="card">
+        <img src="https://www.nistep.go.jp/wp/wp-content/uploads/stfc-hayashi.jpg" alt="林和弘">
+        <h3>林 和弘</h3>
+        <p>NISTEP 上席フェロー。オープンサイエンス政策の第一人者、科学計量学研究者。日本学術会議、内閣府、文部科学省の委員等で日本のオープンサイエンス政策形成を支援し、G7科学技術大臣会合、OECD、UNESCOのプロジェクト等においてはオープンサイエンス専門家として、世界における新たな学術知を生み出す基盤のトップダウンのコンセンサスづくりに貢献。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="schedule">
+    <h2>Schedule</h2>
+    <h3>Day 1 – 7/19 (Sat)</h3>
+    <details><summary><time>13:30</time>集合 & Welcome Remarks</summary><p>担当: 清水 / 場所: コリドイオつくば</p></details>
+    <details><summary><time>13:45</time>江渡先生のセッション</summary><p>担当: 江渡浩一郎氏 / 場所: コリドイオつくば</p></details>
+    <details><summary><time>14:15</time>休憩 & ディスカッション</summary></details>
+    <details><summary><time>14:30</time>共同体をどのようにデザインするのか</summary><p>担当: 林和弘氏・江渡浩一郎氏 / 座長: 清水 / 場所: ホールA</p></details>
+    <details><summary><time>15:30</time>議論 & 移動</summary><p>担当: 運営チーム / 場所: つくば駅→旅館梅屋</p></details>
+    <details><summary><time>18:00</time>チェックイン</summary><p>担当: Logistics / 場所: 旅館梅屋</p></details>
+    <details><summary><time>19:00</time>ご飯</summary><p>担当: 高野瑠衣 / 場所: 旅館梅屋</p></details>
+    <details><summary><time>20:30</time>ナイトセッション</summary><p>担当: 田中 / 場所: 旅館梅屋</p></details>
+
+    <h3 style="margin-top:2rem;">Day 2 – 7/20 (Sun)</h3>
+    <details><summary><time>08:00</time>朝食</summary><p>担当: Catering / 場所: 旅館梅屋</p></details>
+    <details><summary><time>09:30</time>アンカンファレンス</summary><p>担当: 川村賢人 / 場所: つくば市谷田部市民ホール</p></details>
+    <details><summary><time>12:00</time>昼食</summary></details>
+    <details><summary><time>13:30</time>Next Studemia セッション</summary><p>担当: 清水 / 場所: つくば市谷田部市民ホール</p></details>
+    <details><summary><time>15:00</time>Closing Remarks</summary><p>担当: 清水 / 場所: ホールA</p></details>
+  </section>
+
+  <section id="team">
+    <h2>Organising Team</h2>
+    <div class="card-grid">
+      <div class="card">
+        <img src="https://pbs.twimg.com/profile_images/1719553746991235072/qzlc7WBZ_400x400.jpg" alt="Kosuke Shimizu">
+        <h3>清水 紘輔</h3>
+        <p><strong>Affiliation:</strong> 筑波大学 情報学群情報メディア創成学類</p>
+        <p><strong>Interests:</strong> HCI / XR </p>
+        <p class="sns"><a href="https://twitter.com/hong_shui26288" target="_blank">Twitter</a></p>
+      </div>
+      <div class="card">
+        <img src="https://pbs.twimg.com/profile_images/1748737317093974016/Xb_Uw8mv_400x400.jpg" alt="Kent Kawamura">
+        <h3>川村 賢人</h3>
+        <p><strong>Affiliation:</strong> 早稲田大学 基幹理工学部</p>
+        <p><strong>Interests:</strong> Jazz / 音楽</p>
+        <p class="sns"><a href="https://x.com/Kent1729" target="_blank">Twitter</a></p>
+      </div>
+      <div class="card">
+        <img src="https://pbs.twimg.com/profile_images/1865635775007858688/kv8c0_Jz_400x400.jpg" alt="Kyomu">
+        <h3>高野 琉衣</h3>
+        <p><strong>Affiliation:</strong> 早稲田大学 基幹理工学部</p>
+        <p><strong>Interests:</strong> </p>
+        <p class="sns"><a href="https://x.com/esc_voiced_iD" target="_blank">Twitter</a></p>
+      </div>
+      <div class="card">
+        <img src="https://pbs.twimg.com/profile_images/1794497285604438016/4GV6dL5o_400x400.jpg" alt="Ekoro">
+        <h3>待山 真一</h3>
+        <p><strong>Affiliation:</strong> 慶応義塾大学 理工学部</p>
+        <p><strong>Interests:</strong></p>
+        <p class="sns"><a href="https://x.com/Ekoro764" target="_blank">X</a></p>
+      </div>
+    </div>
+  </section>
+  <section id="thanks">
+    <h2>Special Thanks</h2>
+    <ul class="thanks-list">
+      <li>原島 博 氏（東京大学 名誉教授）</li>
+      <li>林 和弘 氏（文部科学省 NISTEP）</li>
+      <li>渡辺 健堂 氏</li>
+      <li>青山 柊太朗 氏</li>
+      <li>田中 翔大 氏</li>
+    </ul>
+  </section>
+
+  <section id="register">
+    <h2>Registration</h2>
+    <p>好奇心あふれる仲間と語り合う2日間。下記フォームからお申込みください（先着順）。</p>
+    <a class="btn" href="https://forms.gle/your-google-form" target="_blank" rel="noopener">参加登録フォームへ</a>
+  </section>
+
+  <section id="sponsor">
+    <h2>Sponsorship</h2>
+    <p>Studemia Summer Camp は学生主体で運営しており、企業・団体の皆さまからのご支援を募集しております。</p>
+    <div class="card-grid">
+      <div class="card">
+        <h3>ゴールドプラン<br><small>(一口 10 万円)</small></h3>
+        <ul>
+          <li>公式サイト・印刷物へのロゴ掲載（大）</li>
+          <li>会場バナー掲示</li>
+          <li>参加枠 3 名</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>シルバープラン<br><small>(一口 5 万円)</small></h3>
+        <ul>
+          <li>公式サイト・印刷物へのロゴ掲載（中）</li>
+          <li>参加枠 2 名</li>
+        </ul>
+      </div>
+    </div>
+    <p style="margin-top:1.2rem;">協賛をご検討の方は <a href="mailto:info@studemia.org">info@studemia.org</a> までご連絡ください。</p>
+  </section>
+
+  <section id="archives">
+    <h2>Archives</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3>Studemia 合宿 2024 春</h3>
+        <p>「俯瞰知と好奇心」をテーマに上郷・森の家で開催。<br>参加者 26 名。</p>
+        <p><a href="#" target="_blank" rel="noopener">開催レポートを見る →</a></p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Studemia Summer Camp</p>
+  </footer>
+
+  <script>
+    const canvas = document.getElementById('gol-canvas');
+    const ctx = canvas.getContext('2d');
+    let w, h, res = 12, cols, rows, curr, next;
+
+    function init() {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+      cols = Math.floor(w / res);
+      rows = Math.floor(h / res);
+      curr = new Array(cols * rows).fill(0).map(() => Math.random() > 0.8 ? 1 : 0);
+      next = new Array(cols * rows).fill(0);
+    }
+    const idx = (x, y) => y * cols + x;
+
+    function step() {
+      for (let y = 1; y < rows - 1; y++) {
+        for (let x = 1; x < cols - 1; x++) {
+          let sum = 0;
+          for (let j = -1; j <= 1; j++) {
+            for (let i = -1; i <= 1; i++) {
+              if (i || j) sum += curr[idx(x + i, y + j)];
             }
-            
-            // 定期的に葉を追加
-            addRandomLeaves();
-            setInterval(addRandomLeaves, 25000);
-            
-            // 光のパルス効果
-            function updateSunRays() {
-                const sunRays = document.querySelector('.sun-rays');
-                const intensity = 0.5 + 0.3 * Math.sin(Date.now() / 2000);
-                sunRays.style.opacity = intensity;
-                sunRays.style.transform = `scale(${1 + 0.2 * Math.sin(Date.now() / 3000)})`;
-                
-                requestAnimationFrame(updateSunRays);
-            }
-            
-            updateSunRays();
-        });
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            const pageLinks = document.querySelectorAll('a[data-page]');
-            const pages = document.querySelectorAll('.page-content');
-            
-            pages.forEach(page => {
-                if (page.id !== 'home-content') {
-                    page.style.display = 'none';
-                }
-            });
-            
-            pageLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    const pageId = this.getAttribute('data-page');
-                    
-                    // Hide all pages
-                    pages.forEach(page => {
-                        page.style.display = 'none';
-                    });
-                    
-                    // Show selected page
-                    document.getElementById(pageId + '-content').style.display = 'block';
-                    
-                    // Update active link
-                    pageLinks.forEach(link => {
-                        link.classList.remove('active');
-                    });
-                    
-                    this.classList.add('active');
-                    
-                    // Scroll to top
-                    window.scrollTo(0, 0);
-                });
-            });
-            
-            const tabs = document.querySelectorAll('.tab');
-            const tabContents = document.querySelectorAll('.tab-content');
-            
-            tabs.forEach(tab => {
-                tab.addEventListener('click', function() {
-                    const tabId = this.getAttribute('data-tab');
-                    
-                    // Hide all tab contents
-                    tabContents.forEach(content => {
-                        content.classList.remove('active');
-                    });
-                    
-                    // Show selected tab content
-                    document.getElementById(tabId + '-tab').classList.add('active');
-                    
-                    // Update active tab
-                    tabs.forEach(tab => {
-                        tab.classList.remove('active');
-                    });
-                    
-                    this.classList.add('active');
-                });
-            });
-        });
-    </script>
+          }
+          const id = idx(x, y);
+          next[id] = (sum === 3 || (sum === 2 && curr[id])) ? 1 : 0;
+        }
+      }
+      [curr, next] = [next, curr];
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = 'rgba(160,160,160,0.4)';
+      for (let y = 0; y < rows; y++) {
+        for (let x = 0; x < cols; x++) {
+          if (curr[idx(x, y)]) ctx.fillRect(x * res, y * res, res, res);
+        }
+      }
+    }
+
+    function loop() {
+      step();
+      draw();
+      requestAnimationFrame(loop);
+    }
+
+    init();
+    loop();
+    window.addEventListener('resize', init);
+  </script>
 </body>
 </html>
