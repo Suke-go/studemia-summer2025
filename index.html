@@ -46,6 +46,131 @@
     .news-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;}
     .news-item{border-left:4px solid var(--accent-blue);padding:0.8rem 1rem;background:#fff;border-radius:6px;}
     .news-item small{color:var(--gray);font-size:0.75rem;}
+
+    /* === Added/Modified CSS for Concept Section === */
+    section#concept {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.6rem;
+    }
+    .concept-text-content {
+      flex: 1;
+    }
+    .concept-image {
+      width: 200px;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    @media (max-width: 768px) {
+      section#concept {
+        flex-direction: column;
+        align-items: center;
+      }
+      .concept-image {
+        margin-top: 1.5rem;
+        width: 150px;
+      }
+    }
+    /* === End of Concept CSS === */
+
+    /* === CSS for Venue Section === */
+    #venue {
+      /* sectionの基本スタイルを継承 */
+    }
+    .venue-container {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.6rem;
+      background: #fff;
+      padding: 1.6rem;
+      border: 1px solid #e6e6e6;
+      border-radius: 12px;
+      margin-top: 2rem;
+    }
+    .venue-image-container {
+      flex-basis: 300px;
+      flex-shrink: 0;
+    }
+    .venue-image-container img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+    }
+    /* image-placeholder class is no longer used with an actual image, but kept for reference if needed */
+    .image-placeholder {
+      border: 2px dashed var(--gray);
+      padding: 20px; text-align: center; background-color: #f9f9f9;
+      min-height: 200px; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; border-radius: 8px;
+      font-size: 0.9em; color: var(--text);
+    }
+    .venue-details {
+      flex: 1;
+    }
+    .venue-details h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+    }
+    .venue-details h3 a {
+      text-decoration: none;
+      color: var(--text);
+    }
+    .venue-details h3 a:hover {
+      text-decoration: underline;
+      color: var(--accent-blue);
+    }
+    .venue-details p, .venue-details ul {
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+    .venue-details ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .venue-details > ul > li { /* Direct children li of .venue-details > ul */
+      margin-bottom: 0.5rem;
+      padding-left: 1.2em; 
+      position: relative;
+    }
+    .venue-details > ul > li::before { /* Custom bullet for top-level list items */
+      content: "✔"; 
+      position: absolute;
+      left: 0;
+      color: var(--accent-green);
+      font-size: 0.9em;
+      line-height: 1.5;
+    }
+    /* Nested list styles */
+    .venue-details ul ul {
+      list-style: disc; /* Standard disc bullet for nested lists */
+      padding-left: 20px; /* Indent nested list */
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .venue-details ul ul li {
+      padding-left: 0; /* Reset padding from parent li */
+      margin-bottom: 0.3rem;
+    }
+    .venue-details ul ul li::before {
+      content: none; /* No custom bullet for nested list items */
+    }
+
+
+    @media (max-width: 768px) {
+      .venue-container {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .venue-image-container {
+        width: 100%;
+        max-width: 350px;
+        margin: 0 auto 1.5rem auto;
+        flex-basis: auto;
+      }
+    }
+    /* === End of Venue CSS === */
   </style>
 </head>
 <body>
@@ -60,6 +185,7 @@
       <a href="#details">開催概要</a>
       <a href="#speakers">ゲスト</a>
       <a href="#schedule">スケジュール</a>
+      <a href="#venue">会場情報</a>
       <a href="#team">運営</a>
       <a href="#register">参加登録</a>
       <a href="#sponsor">協賛</a>
@@ -68,20 +194,24 @@
   </header>
 
   <section id="concept">
-    <h2>Concept</h2>
-    <p><strong>Studemia Summer Camp</strong> は、研究者・クリエイター・起業家の卵が2日間こもり、<em>自分の知識のすそ野を広げ</em> また、研究室の中では生まれないような議論に真剣に向き合うための学術イベントです。<br>
-      ▶︎ <strong>問いを持ち寄る</strong> ― 参加者が抱える〈いま解きたい社会・研究・表現の問い〉を共有し合う。<br>
-      ▶︎ <strong>即席チームで実験する</strong> ― キーノートと <em>アンカンファレンス</em> 形式でテーマを掘り下げ、夜通しでプロトタイピング・議論をする。<br>
-      テーマ <strong>「共同体をどのようにデザインするのか」</strong> は、<u>ヒト・モノ・コトをつなぐ仕組み</u> を自分の中で問い直すことを目的としております。
-    </section>
+    <div class="concept-text-content">
+      <h2>Concept</h2>
+      <p><strong>Studemia Summer Camp</strong> は、研究者・クリエイター・起業家の卵が2日間こもり、<em>自分の知識のすそ野を広げ</em> また、研究室の中では生まれないような議論に真剣に向き合うための学術イベントです。<br>
+        ▶︎ <strong>問いを持ち寄る</strong> ― 参加者が抱える〈いま解きたい社会・研究・表現の問い〉を共有し合う。<br>
+        ▶︎ <strong>即席チームで実験する</strong> ― キーノートと <em>アンカンファレンス</em> 形式でテーマを掘り下げ、夜通しでプロトタイピング・議論をする。<br>
+        テーマ <strong>「共同体をどのようにデザインするのか」</strong> は、<u>ヒト・モノ・コトをつなぐ仕組み</u> を自分の中で問い直すことを目的としております。
+      </p>
+    </div>
+    <img src="logo.png" alt="Studemia Summer Camp Logo" class="concept-image">
+  </section>
 
   <section id="news">
     <h2>News</h2>
    <div class="news-list">
       <div class="news-item"><strong>2025-05-20</strong><br>公式サイトを公開しました！<br><small>Webチーム</small></div>
       <div class="news-item"><strong>2025-05-20</strong><br>7/18につくばにて前夜祭を実施します。興味がある人は事前に予定を入れてください．<br><small>清水</small></div>
-      <!-- 追加ニュースは以下の形式で複製 -->
-      <!-- <div class="news-item"><strong>YYYY-MM-DD</strong><br>本文<br><small>投稿者</small></div> -->
+      <div class="news-item"><strong>2025-06-01</strong><br>7/18 18:30より筑波大学3B棟（3B213）にて田中翔大と清水紘輔がセミナー形式でのプレゼンテーションを行います。筑波大学物理情報システム研究室との合同開催で，これはStudemiaの前夜祭も兼ねております。ケータリングが出ます。また、宿泊場所は清水宅を中心に用意をするので参加希望者は清水まで一報ください。<a href="https://sites.google.com/view/pis-univ-tsukuba/seminar-visitors?authuser=0">詳細はこちらへ</a>。<br><small>清水</small></div>
+
     </div>
   </section>
 
@@ -92,7 +222,8 @@
       <li><strong>場所：</strong>茨城県つくば市</li>
       <li><strong>形式：</strong>オフライン合宿（宿泊あり）</li>
       <li><strong>対象：</strong>高校生・大学生・大学院生</li>
-      <li><strong>参加費：</strong>高校生：無料／大学生・院生：5,000円（宿泊費込・税込）</li>
+      <li><strong>参加費：</strong>高校生：無料／大学生：6,500円／大学院生：7,000円（宿泊費込・税込）</li>
+      <li>※</li>
     </ul>
   </section>
 
@@ -115,23 +246,54 @@
   <section id="schedule">
     <h2>Schedule</h2>
     <h3>Day 1 – 7/19 (Sat)</h3>
-    <details><summary><time>13:30</time>集合 & Welcome Remarks</summary><p>担当: 清水 / 場所: コリドイオつくば</p></details>
-    <details><summary><time>13:45</time>江渡先生のセッション</summary><p>担当: 江渡浩一郎氏 / 場所: コリドイオつくば</p></details>
+    <details><summary><time>13:30</time>集合 & Welcome Remarks</summary><p>担当: 清水</p></details>
+    <details><summary><time>13:45</time>江渡先生のセッション</summary><p>担当: 江渡浩一郎氏</p></details>
     <details><summary><time>14:15</time>休憩 & ディスカッション</summary></details>
-    <details><summary><time>14:30</time>共同体をどのようにデザインするのか</summary><p>担当: 林和弘氏・江渡浩一郎氏 / 座長: 清水 / 場所: ホールA</p></details>
-    <details><summary><time>15:30</time>議論 & 移動</summary><p>担当: 運営チーム / 場所: つくば駅→旅館梅屋</p></details>
-    <details><summary><time>18:00</time>チェックイン</summary><p>担当: Logistics / 場所: 旅館梅屋</p></details>
-    <details><summary><time>19:00</time>ご飯</summary><p>担当: 高野瑠衣 / 場所: 旅館梅屋</p></details>
-    <details><summary><time>20:30</time>ナイトセッション</summary><p>担当: 田中 / 場所: 旅館梅屋</p></details>
+    <details><summary><time>14:30</time>共同体をどのようにデザインするのか</summary><p>担当: 林和弘氏・江渡浩一郎氏 / 座長: 清水</p></details>
+    <details><summary><time>17:30</time>ディスカッション</summary><p>担当: 運営チーム</p></details>
+    <details><summary><time>19:00</time>ご飯</summary><p>担当: 高野</p></details>
+    <details><summary><time>20:30</time>ナイトセッション</summary><p>担当: 田中</p></details>
+    <details><summary><time>22:30</time>就寝</summary><p>古民家の中でぎゅうぎゅうになって睡眠をする予定です．何か特別な配慮が必要な場合は，info&lt;at&gt;studemia.orgにご連絡ください．なお男女は別の部屋に分ける予定です．</p></details>
+
 
     <h3 style="margin-top:2rem;">Day 2 – 7/20 (Sun)</h3>
-    <details><summary><time>08:00</time>朝食</summary><p>担当: Catering / 場所: 旅館梅屋</p></details>
-    <details><summary><time>09:30</time>アンカンファレンス</summary><p>担当: 川村賢人 / 場所: つくば市谷田部市民ホール</p></details>
-    <details><summary><time>12:00</time>昼食</summary></details>
-    <details><summary><time>13:30</time>Next Studemia セッション</summary><p>担当: 清水 / 場所: つくば市谷田部市民ホール</p></details>
-    <details><summary><time>15:00</time>Closing Remarks</summary><p>担当: 清水 / 場所: ホールA</p></details>
+    <details><summary><time>08:00</time>朝食</summary><p>担当: 高野｜朝食の前にシーツなどの交換にご協力いただければ大変うれしいです．朝食時間は融通が利くと思います．</p></details>
+    <details><summary><time>09:30</time>アンカンファレンス</summary><p>担当: 川村</p></details>
+    <details><summary><time>12:00</time>昼食</summary><p>ケータリング（弁当を手配する予定です）</p></details>
+    <details><summary><time>13:30</time>Closing Remarks</summary><p>担当: 清水｜協賛企業の皆さんのご紹介や会計状況などの共有、ZINEの発行についてお話します。</p></details>
   </section>
 
+  <section id="venue">
+    <h2>Venue:</h2>
+    <div class="venue-container">
+      <div class="venue-image-container">
+        <img src="venue.webp" alt="旧小林邸 ひととき 会場の様子">
+      </div>
+      <div class="venue-details">
+        <h3>旧小林邸 ひととき</h3>
+        <p>筑波山の麓に佇む、趣のある古民家です。豊かな自然に囲まれた静かな環境で、特別なひとときをお過ごしいただけます。宿泊施設として、また各種イベントやワークショップのスペースとしても利用可能です。</p>
+        
+        <p><strong>所在地:</strong><br>
+        〒300-4352 茨城県つくば市筑波937</p>
+        
+        <p><strong>アクセス:</strong></p>
+        <ul>
+          <li><strong>自家用車でお越しの場合:</strong>
+            <ul>
+              <li>常磐道 谷田部ICから 約40分</li>
+              <li>常磐道 土浦北ICから 約35分</li>
+            </ul>
+          </li>
+          <li><strong>公共交通機関でお越しの場合:</strong>
+            <ul>
+              <li>つくばエクスプレス(TX) つくば駅より<br>筑波山シャトルバス乗車 約35分、「筑波山神社入口」下車、徒歩約7分</li>
+            </ul>
+          </li>
+        </ul>
+        
+      </div>
+    </div>
+  </section>
   <section id="team">
     <h2>Organising Team</h2>
     <div class="card-grid">
@@ -153,7 +315,7 @@
         <img src="https://pbs.twimg.com/profile_images/1865635775007858688/kv8c0_Jz_400x400.jpg" alt="Kyomu">
         <h3>高野 琉衣</h3>
         <p><strong>Affiliation:</strong> 早稲田大学 基幹理工学部</p>
-        <p><strong>Interests:</strong> </p>
+        <p><strong>Interests:</strong></p>
         <p class="sns"><a href="https://x.com/esc_voiced_iD" target="_blank">Twitter</a></p>
       </div>
       <div class="card">
@@ -178,8 +340,8 @@
 
   <section id="register">
     <h2>Registration</h2>
-    <p>好奇心あふれる仲間と語り合う2日間。下記フォームからお申込みください（先着順）。</p>
-    <a class="btn" href="https://forms.gle/your-google-form" target="_blank" rel="noopener">参加登録フォームへ</a>
+    <p>お申し込みはこちらのサイトよりお願いします。なお参加費は今回は事前振り込みとなります。</p>
+    <a class="btn" href="https://forms.gle/EkoNvQtuRidib1Fs6" target="_blank" rel="noopener">参加登録フォームへ</a>
   </section>
 
   <section id="sponsor">
@@ -202,7 +364,7 @@
         </ul>
       </div>
     </div>
-    <p style="margin-top:1.2rem;">協賛をご検討の方は <a href="mailto:info@studemia.org">info@studemia.org</a> までご連絡ください。</p>
+    <p style="margin-top:1.2rem;">協賛をご検討の方は <a href="mailto:info@studemia.org">info&lt;at&gt;studemia.org</a> までご連絡ください。</p>
   </section>
 
   <section id="archives">
@@ -211,7 +373,7 @@
       <div class="card">
         <h3>Studemia 合宿 2024 春</h3>
         <p>「俯瞰知と好奇心」をテーマに上郷・森の家で開催。<br>参加者 26 名。</p>
-        <p><a href="#" target="_blank" rel="noopener">開催レポートを見る →</a></p>
+        <p>開催レポートはお待ちください</p>
       </div>
     </div>
   </section>
